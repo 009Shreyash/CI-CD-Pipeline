@@ -24,7 +24,7 @@ pipeline{
         }
          stage ('Install'){
             steps {
-                archiveArtifacts artifacts: 'target/*.jar'
+                archiveArtifacts artifacts: 'target/*.war'
             }
         }
        
@@ -32,7 +32,7 @@ pipeline{
             steps{
                 deploy adapters:[tomcat9(credentialsId: "TomcatCreds" , path: "", url:"http://192.168.0.75:8000/")], 
                 contextPath: 'counterwebapp', 
-                war: "target/*.jar"
+                war: "target/*.war"
             }
         }
         
@@ -41,7 +41,7 @@ pipeline{
      post {
             success {
                 junit checksName: 'Testss', testResults: '**/target/surefire-reports/TEST-*.xml'
-                archiveArtifacts 'target/*.jar'
+                archiveArtifacts 'target/*.war'
                 }
              changed {
                 script {
