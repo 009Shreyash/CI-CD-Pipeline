@@ -32,7 +32,7 @@ pipeline{
             steps{
                 deploy adapters:[tomcat9(credentialsId: "TomcatCreds" , path: "", url:"http://192.168.0.75:8000/")], 
                 contextPath: 'counterwebapp', 
-                jar: "target/*.jar"
+                war: "target/*.jar"
             }
         }
         
